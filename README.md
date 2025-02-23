@@ -1,99 +1,167 @@
-# DeepDoc-RAG: Gen AI Document QA
+# 📄🤖 DeepDoc-RAG: Gen AI Document QA
 
-Welcome to **DeepDoc-RAG** – a cutting-edge tool that lets you chat with your documents using the power of generative AI. With this project, you can upload a PDF, have it processed into a searchable vector database, and then ask questions about its content in a natural, conversational way.
+Welcome to **[DeepDoc-RAG](https://github.com/wolfsbane-14/DeepDoc-RAG)** – an advanced AI tool that enables you to interact with your documents using state-of-the-art generative AI. With DeepDoc-RAG, you can upload a PDF, have it processed into a searchable vector database, and ask natural language questions about its content. It leverages **DeepSeek-R1 Distill Llama 70B**, Groq, and LangChain to deliver fast, context-aware responses.
 
-## What Is DeepDoc-RAG?
+---
 
-DeepDoc-RAG is designed to make document analysis interactive and intuitive. By combining document processing, vector storage, and AI-powered retrieval, this project lets you extract meaningful answers from your PDFs with ease. Whether you're reviewing reports, research papers, or any long document, DeepDoc-RAG makes the process simple and engaging.
+## 🚀 Features
 
-## Key Features
+✅ **PDF Upload & Processing:** Quickly upload and process PDF documents.  
+💾 **Vector Database Storage:** Stores document embeddings using **Chroma** for fast retrieval.  
+💬 **Conversational Q&A:** Ask questions and get clear, contextually accurate answers.  
+🧠 **"Think" Section:** View the AI's reasoning behind each response.  
+💡 **Modern Chat Interface:** Enjoy a sleek, bubble-style chat UI with smooth animations and a fixed bottom input bar.  
+⚡ **Fast & Lightweight:** Powered by **DeepSeek-R1 Distill Llama 70B** via **Groq API** for lightning-fast inference.
 
-- **Easy PDF Upload:** Drag and drop your PDF file and let the magic begin.
-- **Smart Document Processing:** The tool automatically extracts text and splits your document into manageable chunks.
-- **Vector Database Storage:** Uses Chroma to store document embeddings for fast and accurate retrieval.
-- **Conversational Q&A:** Ask questions about your document and receive context-aware answers.
-- **Insight into AI Reasoning:** Check out the "Think" section to see a peek behind the scenes of how the AI processes your queries.
-- **Customizable Interface:** Enjoy a sleek UI built with Streamlit and personalized with custom CSS.
+---
 
-## How It Works
+## 📋 Tech Stack
 
-1. **Upload & Process:**  
-   Upload a PDF and the tool processes it, splitting the document and converting it into embeddings stored in a Chroma vector database.
+- **Frameworks:** Streamlit, LangChain, Chroma  
+- **LLM:** DeepSeek-R1 Distill Llama 70B (via Groq API)  
+- **PDF Processing:** Unstructured for text extraction and chunking  
+- **Vector Storage:** Chroma for storing and retrieving embeddings  
+- **Frontend:** Custom-styled chat UI with CSS animations  
 
-2. **Ask Questions:**  
-   Type your question about the document. The system retrieves relevant chunks using a retrieval chain and leverages a generative AI model to provide a precise answer.
+---
 
-3. **View Detailed Reasoning:**  
-   For those curious about the inner workings, the "Think" section reveals insights into how the AI processed your question.
+## 💾 Installation
 
-## Installation
+### ✅ Prerequisites
+- Python 3.8 or higher
+- [Tesseract-OCR](https://github.com/tesseract-ocr/tesseract) (required for PDF processing)
 
-### Prerequisites
+Install Tesseract:  
+**Ubuntu:**  
+```bash
+sudo apt update
+sudo apt install tesseract-ocr
+```
+**macOS (Homebrew):**  
+```bash
+brew install tesseract
+```
 
-- Python 3.7 or higher
-- [Streamlit](https://streamlit.io/)
-- Required Python packages:
-  - `langchain_community`
-  - `langchain_text_splitters`
-  - `langchain_huggingface`
-  - `langchain_chroma`
-  - `langchain_groq`
-- A valid API key for ChatGroq
+---
 
-### Setup Steps
+### 📦 Install Dependencies
 
 1. **Clone the Repository:**
-   ```bash
-   git clone https://github.com/yourusername/deepdoc-rag.git
-   cd deepdoc-rag
-   ```
+```bash
+git clone https://github.com/wolfsbane-14/DeepDoc-RAG.git
+cd DeepDoc-RAG
+```
 
-2. **Create a Virtual Environment:**
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows: venv\\Scripts\\activate
-   ```
+2. **Create a Virtual Environment:**  
+```bash
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+```
 
-3. **Install Dependencies:**  
-   Ensure your `requirements.txt` is updated with all necessary packages, then run:
-   ```bash
-   pip install -r requirements.txt
-   ```
+3. **Install Python Packages:**  
+```bash
+pip install -r requirements.txt
+```
 
-4. **Configure Your API Key:**  
-   Create a `config.json` file in the root directory with the following content:
-   ```json
-   {
-     "GROQ_API_KEY": "your_groq_api_key_here"
-   }
-   ```
-   Replace `your_groq_api_key_here` with your actual ChatGroq API key.
+**`requirements.txt`** includes:  
+```plaintext
+langchain-community==0.3.16
+langchain==0.3.16
+langchain-huggingface==0.1.2
+langchain-text-splitters==0.3.5
+unstructured==0.16.16
+unstructured[pdf]==0.16.16
+langchain-unstructured==0.1.6
+langchain-chroma==0.2.1
+langchain-groq==0.2.3
+streamlit==1.41.1
+```
 
-## Usage
+---
+
+## 🔑 Configuration
+
+1. **Set Up API Key:**  
+Create a `config.json` file in the root directory:
+```json
+{
+  "GROQ_API_KEY": "your_deepseek_api_key_here"
+}
+```
+Replace `"your_deepseek_api_key_here"` with your actual **Groq API key** for **DeepSeek-R1 Distill Llama 70B**.
+
+---
+
+## 💻 Usage
 
 1. **Run the Application:**  
-   Launch the Streamlit app with:
-   ```bash
-   streamlit run your_script.py
-   ```
-   Replace `your_script.py` with the name of your main Python file.
+```bash
+streamlit run main.py
+```
 
-2. **Upload a PDF:**  
-   Use the provided file uploader to select your PDF. The document will be processed and its content stored for quick retrieval.
+2. **Upload and Process PDF:**  
+Use the file uploader to select your PDF. The document will be processed and stored as embeddings in the Chroma vector database.
 
 3. **Chat with Your Document:**  
-   Type your questions in the text area and click "Send". The AI will fetch the relevant information and display a friendly, easy-to-read answer.
+Type your questions in the input field and click **"Send"**. The AI will retrieve relevant information from the vector database and respond conversationally.
 
-4. **Reset the Conversation:**  
-   If you need to start over, simply click the "Clear Chat" button to reset the conversation history.
+4. **View AI Reasoning:**  
+Click on **"See How It Thinks"** to reveal the AI’s internal reasoning.
 
-## Customization
+5. **Reset the Conversation:**  
+Click **"Clear Chat"** to start a new session.
 
-### Interface Tweaks
-Adjust the embedded CSS to change colors, animations, or layout elements to suit your style.
+---
 
-### Document Processing
-Modify the `chunk_size` and `chunk_overlap` parameters in the code to better handle different document types.
+## 📁 Project Structure
 
-### Model Settings
-Fine-tune parameters like the `temperature` for the AI model to get varied responses.
+```
+├── main.py                 # Streamlit frontend with chat UI
+├── rag_utility.py          # Utility functions for document processing and QA chain
+├── config.json             # Configuration file with Groq API key
+├── README.md               # Project documentation (this file)
+└── requirements.txt        # Python dependencies
+```
+
+---
+
+## 🧩 Customization
+
+### Chat Interface  
+- Modify CSS in `main.py` to customize bubble styles, animations, and layout.
+
+### Document Processing  
+- Adjust `chunk_size` and `chunk_overlap` in `rag_utility.py` for different document types.
+
+### LLM Configuration  
+- Fine-tune parameters like `temperature` in the `llm` object for different response styles.
+
+---
+
+## 💡 How It Works
+
+1. **Document Processing:**  
+   - Uploaded PDFs are processed using **UnstructuredPDFLoader**.
+   - Text is split into chunks using **RecursiveCharacterTextSplitter**.
+
+2. **Vector Embedding:**  
+   - Text chunks are embedded using **HuggingFaceEmbeddings**.
+   - Embeddings are stored in **Chroma** for quick retrieval.
+
+3. **Conversational Retrieval:**  
+   - User queries are matched with document chunks using **Chroma’s** retriever.
+   - **DeepSeek-R1 Distill Llama 70B** (via **Groq API**) generates contextually accurate answers.
+
+4. **Chat Interface:**  
+   - Streamlit displays chat messages in bubbles with fade animations.
+   - The fixed input bar mimics the ChatGPT-style user experience.
+
+---
+
+## 🛠️ Troubleshooting
+
+- **Tesseract Not Found:** Ensure Tesseract is installed and added to your PATH.
+- **API Key Error:** Double-check your `config.json` and verify the Groq API key is correct.
+- **Slow Response:** Reduce `chunk_size` or increase `chunk_overlap` for better performance.
+
+--
