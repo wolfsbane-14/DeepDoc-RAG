@@ -6,12 +6,12 @@ Welcome to **[DeepDoc-RAG](https://github.com/wolfsbane-14/DeepDoc-RAG)** – an
 
 ## 🚀 Features
 
-✅ **PDF Upload & Processing:** Quick and secure PDF uploads.
-💾 **Vector Database Storage:** Stores embeddings using **Chroma**.
-💬 **Conversational Q&A:** Clear, contextually accurate responses.
-🧠 **"Think" Section:** Understand the AI's reasoning.
-💡 **Modern Chat Interface:** Sleek chat UI with smooth animations.
-⚡ **Fast & Lightweight:** Powered by **DeepSeek-R1 Distill Llama 70B** via **Groq API**.
+- ✅ **PDF Upload & Processing:** Quick and secure PDF uploads.
+- 💾 **Vector Database Storage:** Stores embeddings using **Chroma**.
+- 💬 **Conversational Q&A:** Clear, contextually accurate responses.
+- 🧠 **"Think" Section:** Understand the AI's reasoning.
+- 💡 **Modern Chat Interface:** Sleek chat UI with smooth animations.
+- ⚡ **Fast & Lightweight:** Powered by **DeepSeek-R1 Distill Llama 70B** via **Groq API**.
 
 ---
 
