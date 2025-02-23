@@ -1,4 +1,4 @@
-# 📄🤖 DeepDoc-RAG: Gen AI Document QA
+# 🐋 DeepDoc-RAG: Gen AI Document QA
 
 Welcome to **[DeepDoc-RAG](https://github.com/wolfsbane-14/DeepDoc-RAG)** – an advanced AI tool that enables you to interact with your documents using state-of-the-art generative AI. With DeepDoc-RAG, you can upload a PDF, have it processed into a searchable vector database, and ask natural language questions about its content. It leverages **DeepSeek-R1 Distill Llama 70B**, Groq, and LangChain to deliver fast, context-aware responses.
 
@@ -12,6 +12,19 @@ Welcome to **[DeepDoc-RAG](https://github.com/wolfsbane-14/DeepDoc-RAG)** – an
 🧠 **"Think" Section:** View the AI's reasoning behind each response.  
 💡 **Modern Chat Interface:** Enjoy a sleek, bubble-style chat UI with smooth animations and a fixed bottom input bar.  
 ⚡ **Fast & Lightweight:** Powered by **DeepSeek-R1 Distill Llama 70B** via **Groq API** for lightning-fast inference.
+
+---
+
+## 🖼️ Screenshots
+
+![Upload PDF](img/img1.png)
+*Upload and process your PDF files easily.*
+
+![Ask Questions](img/img2.png)
+*Ask questions and receive accurate, context-aware answers.*
+
+![AI Reasoning](img/img3.png)
+*See the AI's internal reasoning in the expandable "Think" section.*
 
 ---
 

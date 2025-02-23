@@ -26,10 +26,9 @@ llm = ChatGroq(
 
 
 def process_document_to_chroma_db(file_name):
-    # load the doc using unstructured
+
     loader = UnstructuredPDFLoader(f"{workingDirectory}/{file_name}")
     documents = loader.load()
-    # splitting te text into chunks
     text_splitter = RecursiveCharacterTextSplitter(
         chunk_size=2000,
         chunk_overlap=200
@@ -44,15 +43,11 @@ def process_document_to_chroma_db(file_name):
 
 
 def answer_question(user_question):
-    # load the persistent vectordb
     vectordb = Chroma(
         persist_directory=f"{workingDirectory}/doc_vectorstore",
         embedding_function=embedding
     )
-    # retriever
     retriever = vectordb.as_retriever()
-
-    # create a chain to answer user question usinng DeepSeek-R1
     qa_chain = RetrievalQA.from_chain_type(
         llm=llm,
         chain_type="stuff",
