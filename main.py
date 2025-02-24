@@ -1,7 +1,11 @@
 import os
+os.environ["QT_QPA_PLATFORM"] = "offscreen"
 import sys
 import streamlit as st
 import pysqlite3
+
+
+
 
 # Override sqlite3 for Chroma compatibility
 sys.modules["sqlite3"] = pysqlite3
