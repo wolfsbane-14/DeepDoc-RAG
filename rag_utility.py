@@ -1,3 +1,4 @@
+import streamlit as st
 import os
 import json
 import tempfile
@@ -11,9 +12,15 @@ from langchain.chains import RetrievalQA
 
 from ocr_utility import process_pdf_with_ocr, create_document_from_image
 
-workingDirectory = os.path.dirname(os.path.abspath((__file__)))
-configData = json.load(open(f"{workingDirectory}/config.json"))
-GROQ_API_KEY = configData["GROQ_API_KEY"]
+# workingDirectory = os.path.dirname(os.path.abspath((__file__)))
+# configData = json.load(open(f"{workingDirectory}/config.json"))
+# GROQ_API_KEY = configData["GROQ_API_KEY"]
+# os.environ["GROQ_API_KEY"] = GROQ_API_KEY
+
+if "GROQ_API_KEY" not in st.secrets:
+    raise ValueError("GROQ_API_KEY is missing in Streamlit secrets")
+
+GROQ_API_KEY = st.secrets["GROQ_API_KEY"]
 os.environ["GROQ_API_KEY"] = GROQ_API_KEY
 
 # loading the embedding model
