@@ -10,3 +10,6 @@ langchain-unstructured==0.1.6
 langchain-chroma==0.2.1
 langchain-groq==0.2.3
 streamlit==1.41.1
+pytesseract
+pdf2image
+pillow
