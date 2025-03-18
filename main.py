@@ -111,7 +111,7 @@ st.markdown("""
         
         /* User message bubble */
         .user-bubble {
-            background-color: rgb(30, 92, 207);
+            background-color:rgb(30, 92, 207);
             color: white;
             border-radius: 15px;
             padding: 10px 15px;
@@ -191,7 +191,7 @@ st.markdown("""
         /* Expander for Think Section */
         details.stExpander {
             margin-top: 10px;
-            border: 1px solid rgb(76, 86, 175);
+            border: 1px solidrgb(76, 86, 175);
             border-radius: 10px;
             overflow: hidden;
             animation: fadeIn 0.5s ease-out;

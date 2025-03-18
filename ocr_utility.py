@@ -5,11 +5,10 @@ import pdf2image
 import tempfile
 from langchain_community.document_loaders import UnstructuredFileLoader
 
-# Set Tesseract data path for Streamlit Cloud
-os.environ["TESSDATA_PREFIX"] = "/usr/share/tesseract-ocr/5/tessdata/"
-
-# Path to Tesseract executable (optional, uncomment if needed locally)
-# pytesseract.pytesseract.tesseract_cmd = r'/usr/bin/tesseract'  # Linux/Streamlit Cloud default
+# Path to Tesseract executable - uncomment and modify if not in PATH
+# pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'  # Windows
+# pytesseract.pytesseract.tesseract_cmd = r'/usr/bin/tesseract'  # Linux
+# pytesseract.pytesseract.tesseract_cmd = r'/usr/local/bin/tesseract'  # macOS
 
 def process_image_with_ocr(image_path):
     """Process a single image with OCR and return the extracted text"""

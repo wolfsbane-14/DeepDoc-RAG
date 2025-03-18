@@ -1,7 +1,3 @@
-import sys
-import pysqlite3
-sys.modules["sqlite3"] = pysqlite3
-
 import streamlit as st
 import os
 import json
@@ -16,19 +12,21 @@ from langchain.chains import RetrievalQA
 
 from ocr_utility import process_pdf_with_ocr, create_document_from_image
 
-# Set working directory
-workingDirectory = os.getcwd()
+# workingDirectory = os.path.dirname(os.path.abspath((__file__)))
+# configData = json.load(open(f"{workingDirectory}/config.json"))
+# GROQ_API_KEY = configData["GROQ_API_KEY"]
+# os.environ["GROQ_API_KEY"] = GROQ_API_KEY
 
-# Load GROQ API key from Streamlit secrets
 if "GROQ_API_KEY" not in st.secrets:
     raise ValueError("GROQ_API_KEY is missing in Streamlit secrets")
+
 GROQ_API_KEY = st.secrets["GROQ_API_KEY"]
 os.environ["GROQ_API_KEY"] = GROQ_API_KEY
 
-# Load the embedding model
+# loading the embedding model
 embedding = HuggingFaceEmbeddings()
 
-# Load the LLM from Groq
+# load the llm form groq
 llm = ChatGroq(
     model="deepseek-r1-distill-llama-70b",
     temperature=0
@@ -85,7 +83,7 @@ def process_document_to_chroma_db(file_name):
     else:
         raise ValueError(f"Unsupported file type: {extension}")
     
-    # Splitting the text into chunks
+    # splitting the text into chunks
     text_splitter = RecursiveCharacterTextSplitter(
         chunk_size=2000,
         chunk_overlap=200
@@ -100,15 +98,15 @@ def process_document_to_chroma_db(file_name):
     return 0
 
 def answer_question(user_question):
-    # Load the persistent vectordb
+    # load the persistent vectordb
     vectordb = Chroma(
         persist_directory=f"{workingDirectory}/doc_vectorstore",
         embedding_function=embedding
     )
-    # Retriever
+    # retriever
     retriever = vectordb.as_retriever()
 
-    # Create a chain to answer user question using DeepSeek-R1
+    # create a chain to answer user question using DeepSeek-R1
     qa_chain = RetrievalQA.from_chain_type(
         llm=llm,
         chain_type="stuff",
