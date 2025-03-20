@@ -1,158 +1,124 @@
-# 🐋 DeepDoc-RAG: Gen AI Document QA
+# DeepDoc-RAG: Document QA with Generative AI
 
-Welcome to **[DeepDoc-RAG](https://github.com/wolfsbane-14/DeepDoc-RAG)** – an AI-powered tool for interacting with PDF documents using natural language. DeepDoc-RAG processes PDFs into a vector database and delivers fast, context-aware responses via **DeepSeek-R1 Distill Llama 70B** using the **Groq API**.
+DeepDoc-RAG is a powerful document question-answering tool that leverages generative AI to provide natural language interactions with your PDF documents and images. The application uses DeepSeek-R1 Distill Llama 70B via the Groq API to deliver fast, context-aware responses.
 
----
+## Features
 
-## 🚀 Features
+- **Document Processing**: Upload and process PDFs and images (JPG, PNG, TIFF, BMP) with OCR support for scanned documents
+- **Vector Database**: Stores document embeddings using Chroma DB for efficient retrieval
+- **Conversational Interface**: Natural language question-answering with contextual awareness
+- **Reasoning Transparency**: Examine how the AI forms its responses with the "See How It Thinks" feature
+- **Modern UI**: Clean, responsive chat interface with smooth animations
 
-- ✅ **PDF Upload & Processing:** Quick and secure PDF uploads.
-- 💾 **Vector Database Storage:** Stores embeddings using **Chroma**.
-- 💬 **Conversational Q&A:** Clear, contextually accurate responses.
-- 🧠 **"Think" Section:** Understand the AI's reasoning.
-- 💡 **Modern Chat Interface:** Sleek chat UI with smooth animations.
-- ⚡ **Fast & Lightweight:** Powered by **DeepSeek-R1 Distill Llama 70B** via **Groq API**.
-
----
-
-## 🖼️ Screenshots
+## Screenshots
 
 ![Upload PDF](img/img1.png)  
-*Upload and process PDF files easily.*
+*Document upload and processing interface*
 
 ![Ask Questions](img/img2.png)  
-*Ask questions and get instant responses.*
+*Conversational Q&A with your documents*
 
 ![AI Reasoning](img/img3.png)  
-*View the AI’s reasoning in the "Think" section.*
+*Inspect the AI's reasoning process*
 
----
+## Technology Stack
 
-## 📋 Tech Stack
+- **Frontend**: Streamlit
+- **Language Model**: DeepSeek-R1 Distill Llama 70B (via Groq API)
+- **Document Processing**: Unstructured for text extraction, Tesseract OCR for images/scanned docs
+- **Vector Storage**: Chroma for document embeddings
+- **Framework**: LangChain for retrieval-augmented generation
 
-- **Frontend:** Streamlit
-- **LLM:** DeepSeek-R1 Distill Llama 70B (via Groq API)
-- **PDF Processing:** Unstructured for text extraction
-- **Vector Storage:** Chroma for embeddings
-- **Backend:** LangChain
+## Installation
 
----
+### Prerequisites
+- Python 3.8+
+- Tesseract OCR (for image processing)
 
-## 💾 Installation
+### Setup
 
-### ✅ Prerequisites
-- Python 3.8 or higher
-
----
-
-### 📦 Install Dependencies
-
-1. Clone the Repository:
+1. Clone the repository:
 ```bash
 git clone https://github.com/wolfsbane-14/DeepDoc-RAG.git
 cd DeepDoc-RAG
 ```
 
-2. Create a Virtual Environment:
+2. Create and activate a virtual environment:
 ```bash
 python -m venv venv
-source venv/bin/activate  # On Windows: venv\\Scripts\\activate
+source venv/bin/activate  # On Windows: venv\Scripts\activate
 ```
 
-3. Install Packages:
+3. Install dependencies:
 ```bash
 pip install -r requirements.txt
 ```
 
-**`requirements.txt`** includes:
-```plaintext
-langchain-community==0.3.16
-langchain==0.3.16
-langchain-huggingface==0.1.2
-langchain-text-splitters==0.3.5
-unstructured==0.16.16
-unstructured[pdf]==0.16.16
-langchain-unstructured==0.1.6
-langchain-chroma==0.2.1
-langchain-groq==0.2.3
-streamlit==1.41.1
-```
+## Configuration
 
----
-
-## 🔑 Configuration
-
-1. Set Up API Key:
-Create `config.json` in the root directory:
+Create a `config.json` file in the project root:
 ```json
 {
-  "GROQ_API_KEY": "your_deepseek_api_key_here"
+  "GROQ_API_KEY": "your_groq_api_key_here"
 }
 ```
-Replace with your **Groq API key**.
 
----
+Alternatively, when deploying to Streamlit Cloud, add your GROQ_API_KEY to the Streamlit secrets.
 
-## 💻 Usage
+## Usage
 
-1. **Run the App:**
+1. Start the application:
 ```bash
 streamlit run main.py
 ```
 
-2. **Upload PDF:** Upload your PDF for processing.
+2. Upload a PDF or image document through the web interface
 
-3. **Chat with the Document:** Ask questions, and get context-aware answers.
+3. Ask questions about your document in natural language
 
-4. **View AI Reasoning:** Expand **"See How It Thinks"** to view the AI’s thought process.
+4. Expand the "See How It Thinks" section to understand response generation
 
-5. **Reset Chat:** Click **"Clear Chat"** to start over.
+5. Use "Clear Chat" to reset the conversation
 
----
+## How It Works
 
-## 📁 Project Structure
+DeepDoc-RAG employs a retrieval-augmented generation (RAG) approach:
+
+1. **Document Ingestion**:
+   - PDFs are processed using UnstructuredPDFLoader
+   - Images and scanned documents are processed with Tesseract OCR
+   - Text is split into manageable chunks using RecursiveCharacterTextSplitter
+
+2. **Vector Embedding**:
+   - Text chunks are converted to vector embeddings via HuggingFaceEmbeddings
+   - Embeddings are stored in a Chroma vector database
+
+3. **Retrieval Pipeline**:
+   - User queries trigger a semantic search against the vector database
+   - Most relevant document chunks are retrieved
+   - DeepSeek-R1 Distill Llama 70B generates comprehensive responses based on the retrieved context
+
+## Project Structure
 
 ```
-├── main.py                 # Streamlit frontend
-├── rag_utility.py          # Document processing and QA chain
-├── config.json             # Groq API key
-├── README.md               # Project documentation
-└── requirements.txt        # Dependencies
+├── main.py                # Streamlit interface and UI components
+├── rag_utility.py         # Core RAG functionality
+├── ocr_utility.py         # OCR processing for images and scanned PDFs
+├── config.json            # API key configuration (create this file)
+├── requirements.txt       # Python dependencies
+└── README.md              # Project documentation
 ```
 
----
+## Customization
 
-## 🧩 Customization
+- **Chunking Parameters**: Adjust `chunk_size` and `chunk_overlap` in `rag_utility.py`
+- **Model Settings**: Modify the `temperature` parameter in the LLM configuration
+- **UI Styling**: Customize the CSS in `main.py`
 
-- **Chat Interface:** Modify CSS in `main.py` for different styles.
-- **Document Processing:** Adjust `chunk_size` and `chunk_overlap` in `rag_utility.py`.
-- **LLM Configuration:** Change `temperature` in the `llm` object.
+## Troubleshooting
 
----
+- **OCR Issues**: Ensure Tesseract is properly installed and configured
+- **PDF Processing Errors**: Try different chunk sizes for complex documents
+- **Slow Performance**: Consider reducing chunk size for faster processing
 
-## 🧠 How It Works
-
-1. **Document Processing:**
-   - PDFs are processed using **UnstructuredPDFLoader**.
-   - Text is split into chunks using **RecursiveCharacterTextSplitter**.
-
-2. **Vector Embedding:**
-   - Text chunks are embedded using **HuggingFaceEmbeddings**.
-   - Embeddings are stored in **Chroma**.
-
-3. **Conversational Retrieval:**
-   - User queries are matched with document chunks using **Chroma**.
-   - **DeepSeek-R1 Distill Llama 70B** generates responses.
-
-4. **Chat Interface:**
-   - Streamlit displays messages in animated chat bubbles.
-
----
-
-## 🛠️ Troubleshooting
-
-- **API Key Error:** Verify `config.json` and your **Groq API key**.
-- **Slow Response:** Adjust `chunk_size` or increase `chunk_overlap`.
-
----
 
